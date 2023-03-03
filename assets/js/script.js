@@ -1,15 +1,25 @@
 var startB = document.querySelector(".start-button");
 var introContainer = document.querySelector(".intro-containter");
 var questionCard = document.querySelector(".question-container");
+var resultsCard = document.querySelector(".results-container");
 var questionHeader = document.querySelector(".questions");
 var timeEl = document.querySelector(".time");
 var answer = document.getElementById("answer-container");
 var alertMessage = document.querySelector(".alert");
 var buttonTags = document.querySelectorAll(".next");
+var showResult = document.getElementById("end-result");
+var initial = document.getElementById("initials");
+var initialForm = document.getElementById("initial-form");
+var saveButton = document.getElementById("submit-button");
+
+var litag = document.createElement('li');
+
 
 var questionCount = 0
+var endGame = 1
 
 var secondsLeft = 75;
+var listScores = [];
 
 
 function setTime() {
@@ -19,7 +29,7 @@ function setTime() {
         
         timeEl.textContent = secondsLeft ;
 
-        if(secondsLeft === 0) {
+        if(secondsLeft === 0 || endGame === 0) {
             secondsLeft = secondsLeft + 1
             clearInterval(timerInterval);
             timeEl.textContent = secondsLeft
@@ -39,9 +49,65 @@ function setTimeToClearText() {
             alertMessage.textContent = ""
             clearInterval(timerIntervalText);
         }
+
     }, 1000);
 }
 
+
+function storeValue(){
+
+    saveButton.addEventListener("click", function (event){
+        event.preventDefault();
+        var initialtext = initial.value.trim()
+        if (initialtext === "") {
+            return;
+          }
+
+          var storedresults = JSON.parse(localStorage.getItem("Collection of results"));
+
+        if(storedresults !== null){
+            listScores = storedresults
+            let nextInitial = new listObject();
+            nextInitial.name = initialtext
+            nextInitial.score = secondsLeft
+            listScores.push(nextInitial);
+            localStorage.setItem('Collection of results', JSON.stringify(listScores))
+        } else{
+            let mainInitial = new listObject();
+            mainInitial.name = initialtext
+            mainInitial.score = secondsLeft
+            localStorage.setItem('Collection of results', JSON.stringify(listScores))
+
+        }
+        window.location.href = "Highscore.html";
+    })
+
+}
+
+
+function listObject(){
+    this.name
+    this.score
+}
+
+
+function questionThree(){
+    var questionTwoarray = ['Apple', 'Mango', 'Banana', 'Avo']
+    questionHeader.textContent = "Which do you like best?";
+    for (var i = 0; i < questionTwoarray.length; i++) {
+        buttonTags[i].textContent = questionTwoarray[i];
+    }
+    answer.addEventListener("click", function(event){
+
+        correctAnswerOnly(event, "answer-four");
+        showResult.textContent = secondsLeft
+        questionCard.setAttribute("style", "display: none;")
+        resultsCard.setAttribute("style", "display: block;")
+        storeValue()
+        return
+    })    
+    return
+}
 
 
 function questionTwo(){
@@ -88,7 +154,6 @@ function correctAnswerOnly(select, input){
     var correctAnswer = element.getAttribute("id");
 
     if(correctAnswer == input){
-        console.log(correctAnswer + ' correct')
         alertMessage.textContent = "Correct!"
         setTimeToClearText()
         questionCount++
