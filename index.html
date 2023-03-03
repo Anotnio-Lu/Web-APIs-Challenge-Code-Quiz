@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Quiz Challenge</title>
+    <link rel="stylesheet" href="./assets/style/rest.css">
+    <link rel="stylesheet" href="./assets/style/style.css">
+</head>
+<body>
+    <header>
+        <a href="">View High score</a>
+        <p class="timer">Time: <span class="time">0</span></p>
+    </header>
+    <main>
+        <div class="intro-containter">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Try to answer the following 
+                code-related questions within the time limit. 
+                Keep in mind that incorrect answers will penalize your 
+                score/time by 15 seconds! 
+            </p>
+            <button class="start-button">Start Quiz</button>
+        </div>
+        <div class="question-container">
+            <h1 class="questions">What is an Array?</h1>
+            <div id="answer-container">
+                <button type="button" id="answer-one" class="next">bob</button>
+                <button type="button" id="answer-two" class="next">joe</button>
+                <button type="button" id="answer-three" class="next">array</button>
+                <button type="button" id="answer-four" class="next">lol</button>
+            </div>
+            <div class="alert">
+                <p></p>
+            </div>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAaVBMVEUeiOX///8AgeQAfuO91fXy+P0AgOMAfOPd6foSheQAg+TE2fYsjebZ5/l9se1pp+tUnelho+q20vSXwPCRvPCixvJxq+xGl+ipyvPk7vsjiuXK3vf2+v7p8vzT4/iGtu45kud5r+0AduLDWiFLAAAJHElEQVR4nO3dW3uiOhQGYEic2ERERSqKVu3+/z9yY1s5JpDIWito+13NMxeD7wA5kUMQvnoC3z8APX/C58+f8PnzJ4TIx3m2T+PVOotyqZSSeZStV3G6n50/CK6OK1wm6SbnQrAbTMrgnuLPxd8wIXi+SZMl6m9AEx6S+MqFqrH0KayCX+PkgPVDUISH/YoJpQZs9Sgl2GqPooQXHi85V0N3Tns3FQ8uR/DfAyxcfDLxiK5UCrFbwP4kSOE5VqN4P0jG4jPgrwITnt4j4fLm9UWJ6P0E9cOAhMsdh+L9IPkOqBIBES4yPv7pbEfyDOSNBBAmEcDbpzWKKJmAMMkZCu87LB9tHClcRALRd4uIRj6ro4TLDNv3ZcxGlTkjhKfdHOf9a0fy3Yi643HhHqz6G44S7+TCtytmAdMNu77RClOiB7SKnKeEwreI7gGtoqKHbuMjwi35DfzJfEsiPK1p38B62Nq9UHUWHpmnG/gVyZy7yK7C7dyj7xbnJ9VRuKFoxPRHbBCF/yKfT+g9MvqHJVw+NMAEH6lcGqoOwgX3TSvDHfob9sK97zKmnvkeXridzh28hVsXqbbCi/9CtBlxgRVODmhPtBNOEGhNtBJOEmhLtBFupwksiDbFjYVwP61StB5uUWkMCxdTqgfbmQ9X/YPC5XTv4C18sAE3JPznY7zCJWqoGT4knERvoi8yGifcTB1YEAf6i/3CydYT9QzUGb3C45SL0Srz3rGbPuHJ36CaW1jfCFyfcD39l/A7cv2YcPsst7C4iT2voln49hwv4Xfm5gF/szDy/audYq4VjcJ06o2ZZpTxy5RJiPqMinYA/jeNz6lJeEUsR8VbK4f38UR5dRPuEctR+dm53AzgcszQV9QLT5itNU2HB0IYCH29rxfuEIsZXfUMIlQ7eyFqr5drplaCCA29Ya0wQyxmtC0sGKHMbIUL1LdQN5kbRhgI3aiNTojZmtHXzEBCbctGI0wQb6FhzAFKKDQzGTXCHOZq2mifUThhkNsIE8TKnhtmi4IJWfcCXSHiW8hMHxrAhJo3sSNELEiVcVQMTtgtTjtCvLpQmcca4ITdOrEtxGvO9AABhd2GTVu4w7qFrG/gFlAo263TlvCEdQt53AOEFAa81cVoCQG6otoMzA6BFKrWhOmWEKeqkHLgGxiksF1hNIVnlKpCDM4KBRWKZvesKYwRHlI5H55nDypUzVe+KURosKnIYu0rqDBgZiF8e0baTXiFFTbbNQ0heGUoMrsV97DCZpXYEALfQhXMrHzQwuZjWhceQYWqXTHRCUX9k2ldeIF7SCWTLiuVgIWy3kurC+GuwDO3hZHAwkZXvyY8QLVJZey6OQK0sD5YUhPuoap791Uf0EJVawbXhCuo15A5r2uFFsqVVgh2Ff/Cen1RCQ9gdUWf8FPbBAAXiupFrIQJWKu7R7j7TzvRDlyoqrK8EsL1K8zCTHEiYdW/qIRXsH/eJDwEMiASBtU370oIN0JjECa3K1AJeVe4hGuU6oW7r/9CKqEox01KIVxBoxUu8+9/n0pYFTWlMIVrdmuEl/s7QCWU5XfKUgg4G7gjPOblA0ImLAegSyHgV8OW8GNTK8SohFX3ohQCDnY3hWlj/yEyYVmY3oUfgP37uvCdNUswMqG4Nw/vQsix4FJ42nY23qMT3seFA4Rr/AgPF82cQzIhm7WEYN3f4Ec4W2v3NyMTlp3guxBywiw7Li/KsLkEnTBtCUG/WEjzlFg6YdwSgg1hDIRMWA5k3IVUayvohOuWEHM6Yj10wqwlpFp7QCYsPwXfhZiT2eqhE+YtIdUSJzqhbAmp1o/QCdWfECn+hK//Hr5+Wfr69eHrt2lev136+n0LjBltuvjrH1ItivXXx4ccp+mLv3EajPJaF39jbThzZ7vxN14KOebdF39j3pDfLfri77sFVcPU47cnot2EPH4/BPwG3BeP34ABv+P3xeN3fMC5GH3xOBeDqDD1OJ8mvEJfRH9lj3OiaHoXPue10RQ1VELd3ES4+aV9IRJq55diLHrqhkionSNMM5BBIzTM8ybpBNMIDXP1wdZb9IVGaFhvQdK9oBEa1sxArnsyhkRoXPcEu3ZNHxKhce0a9PpDXUiExvWHeBsqVKEQNjeEQ14H3AmFsGcdMEGzhkKoGv82/nr8ZgiEvevx8ceFCYS9eyrgfwomEPbui4G2t0kZfOHA3iZo+9Pcgy8c2J8GvUpEFw7tMYR+2AO6cHCfKOxJGdjC4b2+sNs12EKL/dqQKwxsocWee6j7JqILrfZNxO3qIwut9r5E3b8UWWi5fynqm4grtNyDFrU4RRVa7yOMWSdiCu33gg6XeMcGYArn9vt5I+7Jjih02ZMdcV99RKHTvvp4ZyO0+zZwQrezEfDOt2Dn9uEWns63wDujhHUOKPF0RsnrnzPzBKfm1dNzgt5vPu/p9c/s+gXnroWnZyls1KNn54Xn53gV55qTayyFr3+G5S84h/QJasWxZ8n+gvOAX/9M519wLvcvOFt9wnXGQD1hLwwv0yQK09FD7sJpEu2AlsIpEi2BtsLpEW2B1sJwO60SlVudKuEkDPdTqhcHTuZ5TBgupnMXucOO4Q7CcKmm0QyXarCp9qAw/DeJnoaMhhrbjwuL/qL/IlUM9AdHCsOt7/LG7mieEcLw7PVllO4nSzgLw1PmbxyVDZ7+BSG8Vf6ebqPzE/qoMHyLfIxtqMg8dA8tDMN0Tn0b5dz4dQlFGL5dad9Gdn3oBo4QFu1UiO+allHCvh0KJwxPO6JHVfKdexEKISwaqhlFE0dkLs1QWGHR34iwjSJyPnkIVBiGSY5pZLnb8WYYwsIYCZz3UYpotA9EWDyrGUIrR/Js5PP5HRBhUebstHvMPx7Fd6PKlypAwqLueI/AKkglovcR9UMzYMIi51gBvJFSsLj3s7VjIIVFFp9sFLLg7UDevirAwiLHS84f6iVLxfOLcwd3MPDCIof9ionO8SR9UUqw1d716EuroAhvOSTxlQslh+6mlErwa5yg6G5BE35lmaSbnAvBlCqsssaSxd8wIXi+SROgasEQXOF3Ps6zfRqv1lmU32Ayj7L1Kk73s7Pdic/jQiH0mz/h8+dP+Pz5Ez5//geb7Y1e9BBLGgAAAABJRU5ErkJggg==">
+        </div>
+    </main>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
