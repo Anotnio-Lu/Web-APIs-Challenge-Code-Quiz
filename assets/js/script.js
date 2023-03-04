@@ -9,11 +9,7 @@ var alertMessage = document.querySelector(".alert");
 var buttonTags = document.querySelectorAll(".next");
 var showResult = document.getElementById("end-result");
 var initial = document.getElementById("initials");
-var initialForm = document.getElementById("initial-form");
 var saveButton = document.getElementById("submit-button");
-
-var litag = document.createElement('li');
-
 
 var questionCount = 0
 var endGame = 1
@@ -53,7 +49,6 @@ function setTimeToClearText() {
     }, 1000);
 }
 
-
 function storeValue(){
 
     saveButton.addEventListener("click", function (event){
@@ -80,6 +75,34 @@ function storeValue(){
 
         }
         window.location.href = "Highscore.html";
+    })
+    
+    initial.addEventListener('keydown', function (event){
+        var key = event.key
+
+        let initialtext = initial.value.trim()
+        if (initialtext === "") {
+            return;
+        }
+
+        if(key == 'Enter'){
+            event.preventDefault();
+
+            let storedresults = JSON.parse(localStorage.getItem("Collection of results"));
+
+            if(storedresults !== null){
+                listScores = storedresults
+            } 
+
+            let mainInitial = new listObject();
+            mainInitial.name = initialtext
+            mainInitial.score = secondsLeft
+            listScores.push(mainInitial);
+
+            localStorage.setItem('Collection of results', JSON.stringify(listScores))
+
+            window.location.href = "Highscore.html";
+        }
     })
 
 }
@@ -181,14 +204,12 @@ function correctAnswerOnly(select, input){
    return
 }
 
-
 function start(){
     introContainer.setAttribute("style", "display: none;")
     questionCard.setAttribute("style", "display: block;")
     timeEl.textContent = secondsLeft
     setTime()
     questionOne()
-
 }
 
 startB.addEventListener("click", start)
