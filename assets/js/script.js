@@ -41,7 +41,7 @@ function setTime() {
 }
 
 function setTimeToClearText() {
-    var seconds = 3
+    var seconds = 1
     var timerIntervalText = setInterval(function() {
 
         seconds--;
@@ -105,6 +105,7 @@ function listObject(){
     this.name
     this.score
 }
+
 
 function questionLoader(Array, question){
     questionHeader.textContent = question

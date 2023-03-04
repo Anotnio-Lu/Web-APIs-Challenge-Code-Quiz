@@ -29,7 +29,7 @@ function printResults(){
         var name = results.name
         var score = results.score
         var li = document.createElement("li");
-        li.textContent = name + ", " + score
+        li.textContent = name + " - " + score
         scoreList.appendChild(li);
 
     }
