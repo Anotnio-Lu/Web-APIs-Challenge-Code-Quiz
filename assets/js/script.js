@@ -20,16 +20,21 @@ var listScores = [];
 
 function setTime() {
     var timerInterval = setInterval(function() {
+        if(secondsLeft !== 0){
+            secondsLeft--;
+        }
 
-        secondsLeft--;
-        
         timeEl.textContent = secondsLeft ;
 
-        if(secondsLeft === 0 || endGame === 0) {
-            secondsLeft = secondsLeft + 1
+        if(secondsLeft == 0) {
+            submitActions()
             clearInterval(timerInterval);
             timeEl.textContent = secondsLeft
             return
+        } else if(endGame == 0){
+            secondsLeft = secondsLeft + 1
+            clearInterval(timerInterval);
+            timeEl.textContent = secondsLeft
         }
 
     }, 1000);
@@ -49,32 +54,19 @@ function setTimeToClearText() {
     }, 1000);
 }
 
-function storeValue(){
+function submitActions(){
+    showResult.textContent = secondsLeft
+    questionCard.setAttribute("style", "display: none;")
+    resultsCard.setAttribute("style", "display: block;")
 
     saveButton.addEventListener("click", function (event){
         event.preventDefault();
+
         var initialtext = initial.value.trim()
         if (initialtext === "") {
             return;
           }
-
-          var storedresults = JSON.parse(localStorage.getItem("Collection of results"));
-
-        if(storedresults !== null){
-            listScores = storedresults
-            let nextInitial = new listObject();
-            nextInitial.name = initialtext
-            nextInitial.score = secondsLeft
-            listScores.push(nextInitial);
-            localStorage.setItem('Collection of results', JSON.stringify(listScores))
-        } else{
-            let mainInitial = new listObject();
-            mainInitial.name = initialtext
-            mainInitial.score = secondsLeft
-            localStorage.setItem('Collection of results', JSON.stringify(listScores))
-
-        }
-        window.location.href = "Highscore.html";
+          storeValue(initialtext)
     })
     
     initial.addEventListener('keydown', function (event){
@@ -87,66 +79,64 @@ function storeValue(){
 
         if(key == 'Enter'){
             event.preventDefault();
-
-            let storedresults = JSON.parse(localStorage.getItem("Collection of results"));
-
-            if(storedresults !== null){
-                listScores = storedresults
-            } 
-
-            let mainInitial = new listObject();
-            mainInitial.name = initialtext
-            mainInitial.score = secondsLeft
-            listScores.push(mainInitial);
-
-            localStorage.setItem('Collection of results', JSON.stringify(listScores))
-
-            window.location.href = "Highscore.html";
+            storeValue(initialtext)
         }
     })
-
 }
 
+function storeValue(input){
+    let storedresults = JSON.parse(localStorage.getItem("Collection of results"));
+
+    if(storedresults !== null){
+        listScores = storedresults
+    } 
+
+    let mainInitial = new listObject();
+    mainInitial.name = input
+    mainInitial.score = secondsLeft
+    listScores.push(mainInitial);
+
+    localStorage.setItem('Collection of results', JSON.stringify(listScores))
+
+    window.location.href = "Highscore.html";
+}
 
 function listObject(){
     this.name
     this.score
 }
 
+function questionLoader(Array, question){
+    questionHeader.textContent = question
+    for (var i = 0; i < Array.length; i++) {
+        buttonTags[i].textContent = Array[i];
+    }
+}
+
 
 function questionThree(){
     var questionTwoarray = ['Apple', 'Mango', 'Banana', 'Avo']
-    questionHeader.textContent = "Which do you like best?";
-    for (var i = 0; i < questionTwoarray.length; i++) {
-        buttonTags[i].textContent = questionTwoarray[i];
-    }
+    questionLoader(questionTwoarray, "Which fruit is the sweetest?")
+
     answer.addEventListener("click", function(event){
 
-        correctAnswerOnly(event, "answer-four");
-        showResult.textContent = secondsLeft
-        questionCard.setAttribute("style", "display: none;")
-        resultsCard.setAttribute("style", "display: block;")
-        storeValue()
+        correctAnswerOnly(event, 4);
+        submitActions()
         return
     })    
     return
 }
 
-
 function questionTwo(){
     var questionTwoarray = ['Tomorrow', 'today', 'Yesterday', 'never']
-    questionHeader.textContent = "second question?";
-
-    for (var i = 0; i < questionTwoarray.length; i++) {
-        buttonTags[i].textContent = questionTwoarray[i];
-    }
+    questionLoader(questionTwoarray, "When is a good time to finish your HW")
 
     answer.addEventListener("click", function(event){
 
         if(questionCount >= 2){
             return
         }
-        correctAnswerOnly(event, "answer-two");
+        correctAnswerOnly(event, 2);
         return
     })    
     return
@@ -157,7 +147,7 @@ function questionOne(){
         if(questionCount >= 1){
             return
         }
-        correctAnswerOnly(event, "answer-one");
+        correctAnswerOnly(event, 1);
         return
     })
     return
@@ -174,7 +164,7 @@ function nextQuestion(){
 
 function correctAnswerOnly(select, input){
     var element = select.target;
-    var correctAnswer = element.getAttribute("id");
+    var correctAnswer = element.getAttribute("data-index");
 
     if(correctAnswer == input){
         alertMessage.textContent = "Correct!"
@@ -192,6 +182,9 @@ function correctAnswerOnly(select, input){
         alertMessage.textContent = "Incorrect!"
         setTimeToClearText()
         secondsLeft -= 15;
+        if(secondsLeft <= 0){
+            secondsLeft = 0
+        }
         questionCount++
         if(questionCount === 3){
             endGame = 0
