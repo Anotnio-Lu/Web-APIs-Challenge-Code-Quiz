@@ -10,13 +10,12 @@ var buttonTags = document.querySelectorAll(".next");
 var showResult = document.getElementById("end-result");
 var initial = document.getElementById("initials");
 var saveButton = document.getElementById("submit-button");
+var questionCountDisplay = document.querySelector(".question-count");
 
 var questionCount = 0
 var endGame = 1
-
 var secondsLeft = 75;
 var listScores = [];
-
 
 function setTime() {
     var timerInterval = setInterval(function() {
@@ -114,30 +113,63 @@ function questionLoader(Array, question){
     }
 }
 
-
-function questionThree(){
-    var questionTwoarray = ['Apple', 'Mango', 'Banana', 'Avo']
-    questionLoader(questionTwoarray, "Which fruit is the sweetest?")
+function questionFive(){
+    questionNumber()
+    var questionTwoarray = ['Java', 'Basic', 'Visual Basic', 'Ada']
+    questionLoader(questionTwoarray, "Microsoft's object-oriented primary programming languages includes:")
 
     answer.addEventListener("click", function(event){
 
-        correctAnswerOnly(event, 4);
+        correctAnswerOnly(event, 3);
         submitActions()
         return
     })    
     return
 }
 
-function questionTwo(){
-    var questionTwoarray = ['Tomorrow', 'today', 'Yesterday', 'never']
-    questionLoader(questionTwoarray, "When is a good time to finish your HW")
+function questionFour(){
+    questionNumber()
+    var questionTwoarray = ["Apple's IOS", "Google's Andriod", "Mas OS X", "Black berry OS"]
+    questionLoader(questionTwoarray, "Today's fastest growing mobile phone operating system is:")
+
+    answer.addEventListener("click", function(event){
+
+        if(questionCount >= 4){
+            return
+        }
+        correctAnswerOnly(event, 2);
+        return
+    })    
+    return
+}
+
+function questionThree(){
+    questionNumber()
+    var questionTwoarray = ['1975', '1980', '1987', '1995']
+    questionLoader(questionTwoarray, "Java Script was first released in:")
+
+    answer.addEventListener("click", function(event){
+
+        if(questionCount >= 3){
+            return
+        }
+        correctAnswerOnly(event, 4);
+        return
+    })    
+    return
+}
+
+function questionTwo(){ 
+    questionNumber()
+    var questionTwoarray = ['2002', '2004', '2005', '2007']
+    questionLoader(questionTwoarray, "Android operating system was acquired by Google in:")
 
     answer.addEventListener("click", function(event){
 
         if(questionCount >= 2){
             return
         }
-        correctAnswerOnly(event, 2);
+        correctAnswerOnly(event, 3);
         return
     })    
     return
@@ -160,6 +192,10 @@ function nextQuestion(){
         questionTwo()
     } else if(questionCount == 2){
         questionThree()
+    } else if(questionCount == 3){
+        questionFour()
+    } else if(questionCount == 4){
+        questionFive()
     }
 }
 
@@ -196,6 +232,10 @@ function correctAnswerOnly(select, input){
         nextQuestion()    
     }
    return
+}
+
+function questionNumber(){
+    questionCountDisplay.textContent = questionCount + 1
 }
 
 function start(){

@@ -20,6 +20,12 @@ clearBtn.addEventListener("click", function (event){
 function printResults(){
 
     var Fulllist = JSON.parse(localStorage.getItem("Collection of results"));
+
+    //The below code was used from an external source (see README file for source, reference 1.1)
+    let storelist = Fulllist.sort(
+        (p1, p2) => (p1.score < p2.score) ? 1 : (p1.score > p2.score) ? -1 : 0);
+    //end of external source code
+
     if (Fulllist !== null) {
         storelist = Fulllist;
     }
@@ -31,7 +37,6 @@ function printResults(){
         var li = document.createElement("li");
         li.textContent = name + " - " + score
         scoreList.appendChild(li);
-
     }
 }
 
